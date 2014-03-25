@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../resources/config.php');
+require_once('../../resources/config_local.php');
 
 if(isset($_GET['method'])){
     switch (($_GET['method'])) {

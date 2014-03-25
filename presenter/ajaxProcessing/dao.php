@@ -6,7 +6,7 @@
  * Time: 2:47 PM
  */
 
-require_once('../../resources/config.php');
+require_once('../../resources/config_local.php');
 
 class DAO
 {
