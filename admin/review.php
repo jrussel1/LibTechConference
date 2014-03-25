@@ -38,7 +38,6 @@ $tableName="Session";
     <script type="text/javascript" src="/resources/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="js/center.js"></script>
     <link rel="stylesheet" href="/resources/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="../oldFiles/oldFiles_EditorV2/jquery.jeditable.js"></script>
     <script type="text/javascript" charset="utf-8" src="/resources/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="/resources/DataTables-1.9.4/media/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css">
@@ -56,6 +55,11 @@ $tableName="Session";
 <h1>Review Session Proposals</h1>
 <div style='float:right'>
     <table><tr>
+            <?PHP
+            if($_SESSION['SESS_ACCESS']=="Admin"){
+                echo("<td style='padding-right:15px;'><a href='/admin/utilities.php'>Utilities Home</a></td>");
+            }
+            ?>
             <td style='padding-right:15px;'><a href='/admin/review.php'>Review Proposals</a></td>
             <td style='padding-right:15px;'><a href='/admin/my_account.php'>Account Info</a></td>
             <td style='padding-right:15px;'><a href='/admin/logout.php'>Logout</a></td>
@@ -173,59 +177,50 @@ $tableName="Session";
             },
             "fnDrawCallback": function( ) {
                 //var response = $.parseJSON(oSettings.jqXHR.responseText);
-                $('td').addClass('edit');
-                needTable.find('tr td:first-child').removeClass('edit');
-                needTable.find('tr td:last-child').removeClass('edit');
+
                 $("div#page_loader").hide();
-                /* Apply the jEditable handlers to the table */
-                oTable.$('.edit').editable( 'ajaxProcessing/edit_in_place_server.php', {
-                    "submitdata": function ( value ) {
-                        return {
-                            "tableName": "<? echo($tableName); ?>",
-                            "rowID":$(this).parent().children(":nth-child(1)").text(),
-                            "rowIDCol":needTable.find("thead tr th:nth-child(1)").text().replace(/ /g,"_"),
-                            "val": value,
-                            "column": needTable.find("thead tr th:nth-child("+(oTable.fnGetPosition( this )[2]+1)+")").text().replace(/ /g,"_")
-                        };
-                    },
-                    "height": "14px",
-                    "width": "100%",
-                    'onblur' : 'submit'
-                } );
+
 
 
                 $('a.info').on("click", function (e) {
                     e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        cache: false,
-                        url: this.href,
-                        data: {
-                            "id":$(this).attr('id'),
-                            "member_id":"<? echo($_SESSION['SESS_MEMBER_ID']);?>"
-                        },
-                        success: function (data) {
-                            $.fancybox(data, {
-                                // fancybox API options
-                                fitToView: false,
-                                width: 905,
-                                height: 505,
-                                autoSize: false,
-                                hideOnContentClick: false,
-                                onClose: function () {
-                                    parent.location.reload(true);
-                                },
-                                openEffect: 'none',
-                                closeEffect: 'none',
-                                onClosed:function(){
-                                    oTable.fnClearTable();
-                                    oTable.fnDraw();
-                                    oTable2.fnClearTable();
-                                    oTable2.fnDraw();
-                                }
-                            });
-                        } // success
-                    }); // ajax
+                    if($("#tabs-1").css("display")=="none"){
+                        console.log("hidden");
+                    }
+                    else{
+
+                        $.ajax({
+                            type: "POST",
+                            cache: false,
+                            url: this.href,
+                            data: {
+                                "id":$(this).attr('id'),
+                                "member_id":"<? echo($_SESSION['SESS_MEMBER_ID']);?>"
+                            },
+                            success: function (data) {
+                                $.fancybox(data, {
+                                    // fancybox API options
+                                    fitToView: false,
+                                    width: 905,
+                                    height: 505,
+                                    autoSize: false,
+                                    hideOnContentClick: false,
+                                    onClose: function () {
+                                        parent.location.reload(true);
+                                    },
+                                    openEffect: 'none',
+                                    closeEffect: 'none',
+                                    onClosed:function(){
+                                        oTable.fnClearTable();
+                                        oTable.fnDraw();
+                                        oTable2.fnClearTable();
+                                        oTable2.fnDraw();
+                                    }
+                                });
+                            } // success
+
+                        }); // ajax
+                    }
                 }); // on
 
             }
@@ -248,59 +243,49 @@ $tableName="Session";
             },
             "fnDrawCallback": function( oSettings ) {
                 //var response = $.parseJSON(oSettings.jqXHR.responseText);
-                $('td').addClass('edit');
-                doneTable.find('tr td:first-child').removeClass('edit');
-                doneTable.find('tr td:last-child').removeClass('edit');
+
                 $("div#page_loader").hide();
-                /* Apply the jEditable handlers to the table */
-                oTable2.$('.edit').editable( 'ajaxProcessing/edit_in_place_server.php', {
-                    "submitdata": function ( value ) {
-                        return {
-                            "tableName": "<? echo($tableName); ?>",
-                            "rowID":$(this).parent().children(":nth-child(1)").text(),
-                            "rowIDCol":doneTable.find("thead tr th:nth-child(1)").text().replace(/ /g,"_"),
-                            "val": value,
-                            "column": doneTable.find("thead tr th:nth-child("+(oTable2.fnGetPosition( this )[2]+1)+")").text().replace(/ /g,"_")
-                        };
-                    },
-                    "height": "14px",
-                    "width": "100%",
-                    'onblur' : 'submit'
-                } );
+
 
 
                 $('a.info').on("click", function (e) {
                     e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        cache: false,
-                        url: this.href,
-                        data: {
-                            "id":$(this).attr('id'),
-                            "member_id":"<? echo($_SESSION['SESS_MEMBER_ID']);?>"
-                        },
-                        success: function (data) {
-                            $.fancybox(data, {
-                                // fancybox API options
-                                fitToView: false,
-                                width: 905,
-                                height: 505,
-                                autoSize: false,
-                                hideOnContentClick: false,
-                                onClose: function () {
-                                    parent.location.reload(true);
-                                },
-                                openEffect: 'none',
-                                closeEffect: 'none',
-                                onClosed:function(){
-                                    oTable.fnClearTable();
-                                    oTable.fnDraw();
-                                    oTable2.fnClearTable();
-                                    oTable2.fnDraw();
-                                }
-                            });
-                        } // success
-                    }); // ajax
+                    if($("#tabs-2").css("display")=="none"){
+                        console.log("hidden");
+                    }
+                    else{
+
+                        $.ajax({
+                            type: "POST",
+                            cache: false,
+                            url: this.href,
+                            data: {
+                                "id":$(this).attr('id'),
+                                "member_id":"<? echo($_SESSION['SESS_MEMBER_ID']);?>"
+                            },
+                            success: function (data) {
+                                $.fancybox(data, {
+                                    // fancybox API options
+                                    fitToView: false,
+                                    width: 905,
+                                    height: 505,
+                                    autoSize: false,
+                                    hideOnContentClick: false,
+                                    onClose: function () {
+                                        parent.location.reload(true);
+                                    },
+                                    openEffect: 'none',
+                                    closeEffect: 'none',
+                                    onClosed:function(){
+                                        oTable.fnClearTable();
+                                        oTable.fnDraw();
+                                        oTable2.fnClearTable();
+                                        oTable2.fnDraw();
+                                    }
+                                });
+                            } // success
+                        }); // ajax
+                    }
                 }); // on
 
             }

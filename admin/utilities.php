@@ -65,6 +65,7 @@ echo("<br/>
 	<td style='padding-right:15px;'><a href='/admin/utilities.php'>Home</a></td>
 	<td style='padding-right:15px;'><a href='/admin/logout.php'>Logout</a></td>
 	<td style='padding-right:15px;'><a href='/admin/my_account.php'>Account Info</a></td>
+	<td style='padding-right:15px;'><a href='/admin/review.php'>Review Proposals</a></td>
 	<td style='padding-right:15px;'><a href='/Library.jpg' target='_blank'>View LDS of Database</a></td>
 	</tr></table>
 	</div>

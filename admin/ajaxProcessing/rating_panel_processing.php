@@ -229,11 +229,11 @@ echo("<tr>
                 url:"ajaxProcessing/ratings_submit.php",
                 data:values,
                 type:"POST"
-            })
-                .done(
+            }).done(
                 function(msg){
+
                     var resultBox = $("#resultBox");
-                    resultBox.$("h3").html(msg);
+                    resultBox.find("h3").html(msg);
                     resultBox.center();
                     resultBox.fadeIn(1000,function(){
                         resultBox.delay(500).fadeOut(1000);
