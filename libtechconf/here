@@ -1,0 +1,275 @@
+<?PHP 
+require_once('Editor_V2/config.php');
+$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	if(!$link) {
+		die('Failed to connect to server: ' . mysql_error());
+	}
+	
+	//Select database
+	$db = mysql_select_db(DB_DATABASE);
+	if(!$db) {
+		die("Unable to select database");
+	}
+	include('login_panel/login_ex.php');
+	?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Presenter Portal</title>
+
+<? include('login_panel/header_incl.php'); ?>
+<link rel="stylesheet" href="portal.css" type="text/css" media="screen" />
+<!-- Place inside the <head> of your HTML -->
+
+  <script src="chosen-master/chosen/chosen.jquery.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="chosen-master/chosen/chosen.css" type="text/css" media="screen" />
+  
+
+
+<?php /*?>jQuery(document).ready(function(){
+	jQuery(".chosen").data("placeholder","Select Frameworks...").chosen();
+});<?php */?>
+</head>
+
+<body>
+<? include('login_panel/panel.php'); ?>
+<br /><br />
+<div id="wrapper">
+<img src="images/banner.png" />
+<div id="nav"><? if($_SESSION['id']){ include "navbar1.html"; }else{ include "navbar2.html";}// include the navbar based on whether the user is logged in or not ---- navbar1 if in, navbar2 if not ?> </div><div id="container" class="rounded-corners">
+<h1>Submit a Proposal</h1>
+
+<?
+	if (!empty($_POST["submissiontitle"])) {
+		$qry=" SELECT * FROM jrussell_Lib.Submission WHERE Submission.Submission_Title ='".$_POST['submissiontitle']."';";
+		$result=mysql_query($qry);
+		if($result) {
+			$num_results = mysql_num_rows($result);
+			while ( $row = mysql_fetch_array($result) ) {
+				if ($num_results > 0){
+					$data = mysql_fetch_array($result);
+					echo ("<form action='' method='post' name='Update_Submission'>
+					<table>
+					<tr>
+						<td colspan='4'><h2>Submission Info</h2></td>
+					</tr>
+					<tr>
+						<td><label id='l".$row["Submission_Title"]."_Submission_Title' for='".$row["Sumbission_ID"]."_Submission_Title'>Title:</label></td><td>
+						<input type='text' name='".$row["Submission_Title"]."_Submission_Title' id='Submission_Title' value='".$row['Submission_Title']."'/></td>
+					</tr>
+					<tr>
+						<td><label id='lSubmission_Style' for='Submission_Style'>Style:</label></td>
+						<td><select name='Submission_Style' class='Submission_Style' id='Submission_Style'>
+						<option disabled='disabled' selected='selected'>Please select a type:</option>");
+						$qry2="SELECT * FROM jrussell_Lib.Session_Style;";
+						$result2=mysql_query($qry2);
+						if($result2) {
+							while ( $row2 = mysql_fetch_array($result2) ) {
+								echo("<option value='".$row2['Style']."' ");
+								if($row['Style']==$row2['Style']){
+									echo("selected='selected'");
+								}
+								echo(">".$row2['Style']."</option>");
+							}
+						}
+						echo("</select></td>
+					</tr>
+					<tr>
+						<td><label id='lSubmission_Style' for='Submission_Style'>Presenters:</label></td>
+					</tr>					
+					<tr>
+						<td><label id='l".$row["Submission_Abstract"]."_Submission_Abstract' for='".$row["Submission_Abstract"]."_Submission_Abstract'>Abstract:</label></td>
+					</tr>
+					<tr>
+						<td></td><td><textarea>".$row["Submission_Abstract"]."</textarea></td>
+					</tr>
+					<tr>
+						<td><label id='l".$row["Description"]."_Description' for='".$row["Description"]."_Description'>Description:</label></td>
+					</tr>
+					<tr>
+						<td></td><td><textarea>".$row["Description"]."</textarea></td>
+					</tr>
+					</table>
+					</form>");
+				}
+			}
+		}
+	} else {
+		echo ('no');
+	}
+?>
+
+<div id="sidebar" class="rounded-corners" style="height:400px; "><h2>Please note:</h2> <p>If you have been in our system before, some data may be prepopulated for you. Please verify any infomation and fill in missing spaces. The more complete our records, the better we can help you. Information entered here can be reused in your proposal and by your co-presenters adding you to their submission.</p> </div>
+<div id="content"><h1>Your Account</h1>
+<p></p>
+<?
+	$qry="SELECT * FROM jrussell_Lib.Person, jrussell_Lib.Institution, jrussell_Lib.Institution_Type 
+	where Person.Email='".$_SESSION['email']."' 
+	and Person.Institution_ID=Institution.Institution_ID
+	and Institution_Type.Institution_ID=Institution.Institution_ID;";
+	$result=mysql_query($qry);
+	if($result) {
+		$num_results = mysql_num_rows($result); 
+		if ($num_results > 0){ 
+ 
+			while ( $row = mysql_fetch_array($result) ) {
+				echo("<form action='' method='post' name='Update_Person'><table>
+				<tr><td colspan='2'><h3>Personal Info</h3></td><td colspan='2'><h3>Institution Info</h3></td></tr>
+				<tr><td><label id='l".$row["Person_ID"]."_First_Name' for='".$row["Person_ID"]."_First_Name'>First Name:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_First_Name' id='First_Name' value='".$row['First_Name']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_Name' for='".$row["Institution_ID"]."_Institution_Name'>Institution Name:
+				</label></td><td>
+				<input type='text' name='".$row["Institution_ID"]."_Institution_Name' id='Institution_Name' value='".$row['Institution_Name']."'/></td>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_Last_Name' for='".$row["Person_ID"]."_Last_Name'>Last Name:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_Last_Name' id='Last_Name'  value='".$row['Last_Name']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_Address' for='".$row["Institution_ID"]."_Institution_Address'>
+				Institution Street Address:</label></td><td>
+				<input type='text' name='".$row["Institution_ID"]."_Institution_Address' id='Institution_Address' 
+				value='".$row['Institution_Address']."'/></td>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_Person_Title' for='".$row["Person_ID"]."_Person_Title'>Job Title:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_Person_Title' id='Person_Title' value='".$row['Person_Title']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_City' for='".$row["Institution_ID"]."_Institution_City'>
+				Institution City:</label></td><td>
+				<input type='text' name='".$row["Institution_ID"]."_Institution_City' id='Institution_City' value='".$row['Institution_City']."'/></td>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_Street_Address' for='".$row["Person_ID"]."_Street_Address'>Street Address:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_Street_Address' id='Street_Address' value='".$row['Street_Address']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_State' for='".$row["Institution_ID"]."_Institution_State'>
+				Institution State:</label></td><td>
+				<input type='text' name='".$row["Institution_ID"]."_Institution_State' id='Institution_State' value='".$row['Institution_State']."'/>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_City' for='".$row["Person_ID"]."_City'>City:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_City' id='City' value='".$row['City']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_Zip' for='".$row["Institution_ID"]."_Institution_Zip'>
+				Institution Zip:</label></td><td>
+				<input type='text' name='".$row["Institution_ID"]."_Institution_Zip' id='Institution_Zip' value='".$row['Institution_Zip']."'/>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_State' for='".$row["Person_ID"]."_State'>State:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_State' id='State' value='".$row['State']."'/></td>
+				<td><label id='l".$row["Institution_ID"]."_Institution_Type' for='".$row["Institution_ID"]."_Institution_Type'>
+				Insitution Type:</label></td><td>
+				<select name='".$row["Institution_ID"]."_Institution_Type' id='Institution_Type'>");
+				$qry2="SELECT * FROM jrussell_Lib.Target_Audience;";
+				$result2=mysql_query($qry2);
+				if($result2) {
+					while ( $row2 = mysql_fetch_array($result2) ) {
+						echo("<option value='".$row2['Audience']."' ");
+						if($row['Institution_Type']==$row2['Audience']){
+							echo("selected='selected'");
+						}
+						echo(">".$row2['Audience']."</option>");
+					}
+				}
+				echo("</td>
+				</td>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_Zip' for='".$row["Person_ID"]."_Zip'>Zipcode:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_Zip' id='Zip' value='".$row['Zip']."'/></td>
+				</tr>
+        		<tr><td><label id='l".$row["Person_ID"]."_Phone' for='".$row["Person_ID"]."_Phone'>Phone Number:</label></td><td>
+				<input type='text' name='".$row["Person_ID"]."_Phone' id='Phone' value='".$row['Phone']."'/></td>
+				<td></td><td></td>
+				</tr>
+				
+				</table></form>");
+			}
+		}
+		else{ 
+			echo("<form action='' method='post' name='New_Person'><table>
+				<tr>
+					<td colspan='2'><h3>Personal Info</h3></td><td colspan='2'><h3>Institution Info</h3></td>
+				</tr>
+				<tr>
+					<td><label id='lFirst_Name' for='First_Name'>First Name:</label></td><td>
+					<input type='text' name='First_Name' id='First_Name' /></td>
+				<td><label id='lInstitution_Name' for='Institution_Name'>Institution Name:</label></td><td>
+				<input type='text' name='Institution_Name' id='Institution_Name' /></td>
+				</tr>
+        		<tr><td><label id='lLast_Name' for='Last_Name'>Last Name:</label></td><td>
+				<input type='text' name='Last_Name' id='Last_Name'  /></td>
+				<td><label id='lInstitution_Address' for='Institution_Address'>Institution Street Address:</label></td><td>
+				<input type='text' name='Institution_Address' id='Institution_Address' /></td>
+				</tr>
+        		<tr><td><label id='lPerson_Title' for='Person_Title'>Job Title:</label></td><td>
+				<input type='text' name='Person_Title' id='Person_Title' /></td>
+				<td><label id='lInstitution_City' for='Institution_City'>Institution City:</label></td><td>
+				<input type='text' name='Institution_City' id='Institution_City' /></td>
+				</tr>
+        		<tr><td><label id='lStreet_Address' for='Street_Address'>Street Address:</label></td><td>
+				<input type='text' name='Street_Address' id='Street_Address' /></td>
+				<td><label id='lInstitution_State' for='Institution_State'>Institution State:</label></td><td>
+				<input type='text' name='Institution_State' id='Institution_State' />
+				</tr>
+        		<tr><td><label id='lCity' for='City'>City:</label></td><td>
+				<input type='text' name='City' id='City' /></td>
+				<td><label id='lInstitution_Zip' for='Institution_Zip'>Institution Zip:</label></td><td>
+				<input type='text' name='Institution_Zip' id='Institution_Zip' />
+				</tr>
+        		<tr><td><label id='lState' for='State'>State:</label></td><td>
+				<input type='text' name='State' id='State' /></td>
+				<td><label id='lInstitution_Type' for='Institution_Type'>Insitution Type:</label></td><td>
+				<select name='Institution_Type' id='Institution_Type'>
+				<option disabled='disabled' selected='selected'>Please select a type:</option>");
+				$qry2="SELECT * FROM jrussell_Lib.Target_Audience;";
+				$result2=mysql_query($qry2);
+				if($result2) {
+					while ( $row2 = mysql_fetch_array($result2) ) {
+						echo("<option value='".$row2['Audience']."'>".$row2['Audience']."</option>");
+					}
+				}
+				echo("</td>
+				</td>
+				</tr>
+        		<tr><td><label id='lZip' for='Zip'>Zipcode:</label></td><td>
+				<input type='text' name='Zip' id='Zip' /></td>
+				</tr>
+        		<tr><td><label id='lPhone' for='Phone'>Phone Number:</label></td><td>
+				<input type='text' name='Phone' id='Phone'/></td>
+				<td></td><td></td>
+				</tr>
+				
+				</table></form>"); 
+		}
+	}
+
+?>
+
+</div>
+
+
+</div>
+</div>
+<div>
+        <em>Multiple Select</em>
+        <select data-placeholder="Your Favorite Types of Bear" multiple class="chzn-select" tabindex="16">
+          <option value=""></option>
+          <option>American Black Bear</option>
+          <option>Asiatic Black Bear</option>
+          <option>Brown Bear</option>
+          <option selected>Giant Panda</option>
+          <option>Sloth Bear</option>
+          <option>Sun Bear</option>
+          <option>Polar Bear</option>
+          <option>Spectacled Bear</option>
+        </select>
+      </div>
+</body>
+
+</html>
+<script type="text/javascript"> 
+    var config = {
+      '.chzn-select'           : {},
+      '.chzn-select-deselect'  : {allow_single_deselect:true},
+      '.chzn-select-no-single' : {disable_search_threshold:10},
+      '.chzn-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chzn-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $('.chzn-select').chosen();
+    }
+  </script>

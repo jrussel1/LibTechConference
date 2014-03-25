@@ -1,0 +1,138 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, em, font, img, small, strike, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, iframe, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-size:100%;font-family:inherit;}
+ol, ul,li {list-style:none}table {border-collapse:separate;border-spacing:0}caption, th, td {text-align:left;font-weight:normal}
+
+body {background:#fff;font:14px/1.6em "Helvetica Neue", "Lucida Grande", Helvetica, Arial, sans-serif;}
+p {margin:0 0 10px;}
+ol, ul, li { list-style: none }
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { font-weight: normal; text-align: left; }
+a { border: 0; color: #0960AB;text-decoration: none; }
+a:hover {  text-decoration: underline; }
+h1 {font-size: 20px;font-weight:700}
+h2 {font-size:16px;font-weight:700}
+h3 { clear: left; color: #999; margin: 14px 10px; text-align: right; }
+h4 {font-size:14px; font-weight:700;}
+.session{
+    background-color:#9C6;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+    border-radius: 4px;
+    border: 1px solid transparent;
+    border-right-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+    display: block;
+    float: left;
+    margin: 0 12px 12px 0;
+    position: relative;
+    text-shadow: 1px 1px 0 rgba(255,255,255,.25);
+    line-height: 27px;
+    z-index: 2;
+
+}
+.time{
+    border-right:3px solid #999;
+    margin-right:10px;
+    vertical-align:middle;
+    text-align:center;}
+.sessCells{
+    padding:5px 5px 10px 5px;
+}
+tr#days{ height:40px;}
+#tooltip {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px;
+    opacity: 1;
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+
+
+}
+div.tooltip {
+    -moz-box-shadow: 5px 5px 8px #CCC;
+    -webkit-box-shadow: 5px 5px 8px #CCC;
+    box-shadow: 5px 5px 8px #CCC;
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:350px;
+    z-index:98;
+}
+
+div.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;  /* left arrow slant */
+    border-right: 10px solid transparent; /* right arrow slant */
+    border-bottom: 10px solid #666; /* bottom, add background color here */
+    font-size: 0;
+    line-height: 0;
+    z-index:99;
+}
+div.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #666;
+    font-size: 0;
+    line-height: 0;
+    z-index:99;
+}
+.selected-sess{
+    border:2px solid #666;
+}
+tr#days:first-child td{
+    border-bottom:3px solid #999;
+}
+table#sched {
+    border-collapse: collapse;
+    width: 100%;
+}
+table#sched tr td:first-child{
+    padding:0;
+    background-color:#FFF;
+}
+table#sched tr td{
+    padding:5px;
+}
+table#sched tr:nth-child(even){
+    background-color:rgb(229,229,255);;
+}
+table#filters{
+    width: 100%;
+}
+td#scheduleCol{
+    width: 75%;
+}
+td#sidebarCol{
+    width: 25%;
+}
+#floatingSidebar{
+    background-color:#D3D3D3;
+    float:left;
+    position:absolute;
+    z-index:1;
+    left: 1%;
+    width: 23%;
+}
+.chosen-select{
+    width: 200px;
+}
+#cart{
+    width: 100%;
+    height: 300px;
+    /*height: auto;*/
+    background-color: #eeeeee;
+    z-index: 1;
+    overflow: scroll;
+}
+.cart-day-container, .cart-time-container {
+    display: none;
+    clear: both;
+}
