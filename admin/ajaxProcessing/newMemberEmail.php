@@ -54,7 +54,7 @@ elseif(!count($err))
             'LibTech Conference Reviewer Registration - Your New Password',
             "<html><body>This will give you access to your ".$_POST['access_level']." account for the 2014 LibTech Conferece.
 					<br /><br />Your temporary password is: ".$pass.
-            "<br /><br />To fill out your account information and begin reviewing go to <a href='http://www.jesserussell.net/libtechconf/admin/'>login</a> and go to the 'My
+            "<br /><br />To fill out your account information and begin reviewing go to <a href='http://www.jesserussell.net/admin/'>login</a> and go to the 'My
             Account' page.</body></html>",
             'From: NOREPLY@libTechConf.org'."\r\n".'MIME-Version: 1.0' . "\r\n".'Content-type: text/html; charset=iso-8859-1' . "\r\n");
 

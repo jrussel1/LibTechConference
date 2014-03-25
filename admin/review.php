@@ -35,12 +35,12 @@ $tableName="Session";
         ?></title>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script type="text/javascript" src="/libtechconf/resources/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/resources/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="js/center.js"></script>
-    <link rel="stylesheet" href="/libtechconf/resources/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/resources/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
     <script type="text/javascript" src="../oldFiles/oldFiles_EditorV2/jquery.jeditable.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/libtechconf/resources/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="/libtechconf/resources/DataTables-1.9.4/media/css/jquery.dataTables.css" />
+    <script type="text/javascript" charset="utf-8" src="/resources/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="/resources/DataTables-1.9.4/media/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css">
     <link rel="stylesheet" href="css/reviewStyle.css">
 
@@ -56,9 +56,9 @@ $tableName="Session";
 <h1>Review Session Proposals</h1>
 <div style='float:right'>
     <table><tr>
-            <td style='padding-right:15px;'><a href='/libtechconf/admin/review.php'>Review Proposals</a></td>
-            <td style='padding-right:15px;'><a href='/libtechconf/admin/my_account.php'>Account Info</a></td>
-            <td style='padding-right:15px;'><a href='/libtechconf/admin/logout.php'>Logout</a></td>
+            <td style='padding-right:15px;'><a href='/admin/review.php'>Review Proposals</a></td>
+            <td style='padding-right:15px;'><a href='/admin/my_account.php'>Account Info</a></td>
+            <td style='padding-right:15px;'><a href='/admin/logout.php'>Logout</a></td>
         </tr></table>
 </div>
 <p>Use this interfaces to review and rate session proposals.</p><br/><br/>

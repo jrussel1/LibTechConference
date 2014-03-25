@@ -20,12 +20,12 @@ if(!$db) {
     <title>Schedule</title>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-    <script src="/libtechconf/resources/chosen/chosen.jquery.js"></script>
-    <script src="/libtechconf/resources/jquery-toggles-master/toggles.js"></script>
+    <script src="/resources/chosen/chosen.jquery.js"></script>
+    <script src="/resources/jquery-toggles-master/toggles.js"></script>
     <script src="js/schedule.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" href="/libtechconf/resources/chosen/chosen.css" />
-    <link rel="stylesheet" href="/libtechconf/resources/jquery-toggles-master/themes/toggles-light.css" />
+    <link rel="stylesheet" href="/resources/chosen/chosen.css" />
+    <link rel="stylesheet" href="/resources/jquery-toggles-master/themes/toggles-light.css" />
     <link rel="stylesheet" href="css/schedule.css" />
 
 </head>
