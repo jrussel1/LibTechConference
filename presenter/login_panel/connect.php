@@ -5,18 +5,12 @@ if(!defined('INCLUDE_CHECK')) die('You are not allowed to execute this file dire
 
 /* Database config */
 
-$db_host		= 'jesserussell.net';
-$db_user		= 'jrussell_admin';
-$db_pass		= 'karma4YOU';
-$db_database	= 'jrussell_Lib'; 
+define('DB_TYPE', 'mysql');
+define('DB_HOST', '192.254.234.179');
+define('DB_USER', 'jrussell_dev');
+define('DB_PASSWORD', 'no1more2pass3words');
+define('DB_DATABASE', 'jrussell_Lib');
 
 /* End config */
 
 
-
-$link = mysql_connect($db_host,$db_user,$db_pass) or die('Unable to establish a DB connection');
-
-mysql_select_db($db_database,$link);
-mysql_query("SET names UTF8");
-
-?>

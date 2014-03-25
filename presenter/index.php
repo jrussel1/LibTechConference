@@ -1,5 +1,5 @@
 <?PHP 
-require_once('../resources/config.php');
+require_once('../resources/config_local.php');
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 	if(!$link) {
 		die('Failed to connect to server: ' . mysql_error());
@@ -17,7 +17,7 @@ $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Presenter Portal</title>
-<link rel="stylesheet" href="css/portal.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/presenter/css/portal.css" type="text/css" media="screen" />
 <? include('login_panel/header_incl.php'); ?>
 </head>
 

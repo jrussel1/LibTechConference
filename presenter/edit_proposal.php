@@ -1,5 +1,5 @@
 <?php
-    require_once('../resources/config.php');
+    require_once('../resources/config_local.php');
     $conn = pdo_connect();
 ?>
 
