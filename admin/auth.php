@@ -7,7 +7,7 @@
 		if ($_SESSION['SESS_TIMEOUT'] + 6000 * 60 < time()) {
     		 // session timed out
   
-			header("location: ../access-denied.php");
+			header("location: access-denied.php");
 		exit();
 		}
 	}

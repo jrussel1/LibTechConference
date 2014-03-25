@@ -53,7 +53,7 @@ th {
 </head>
 <body>
 <p>&nbsp;</p>
-<form id="loginForm" name="loginForm" method="post" action="login-exec.php">
+<form id="loginForm" name="loginForm" method="post" action="/admin/login-exec.php">
   <table width="300" border="0" align="center" cellpadding="2" cellspacing="0">
     <tr>
       <td width="112"><label for="login"><strong>Login</strong></label></td>

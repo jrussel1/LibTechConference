@@ -1,4 +1,6 @@
 <?php
+require_once('../../resources/config_local.php');
+
 	/*
 	 * Script:    DataTables server-side script for PHP and MySQL
 	 * Copyright: 2010 - Allan Jardine	But also modified in many ways by Jesse Russell
@@ -24,10 +26,10 @@
 	
 	
 	/* Database connection information */
-	$gaSql['user']       = "jrussell_admin";
-	$gaSql['password']   = "karma4YOU";
-	$gaSql['db']         = "jrussell_Lib";
-	$gaSql['server']     = "localhost";
+	$gaSql['user']       = DB_USER;
+	$gaSql['password']   = DB_PASSWORD;
+	$gaSql['db']         = DB_DATABASE;
+	$gaSql['server']     = DB_HOST;
 	
 	if(isset($_GET['member_id'])){
 		if(isset($_GET['needReview'])&&$_GET['needReview']=="true"){

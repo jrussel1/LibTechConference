@@ -3,7 +3,7 @@
 	session_start();
 	
 	//Include database connection details
-	require_once('config.php');
+	require_once('../resources/config_local.php');
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
@@ -74,9 +74,9 @@
 			$_SESSION['SESS_TIMEOUT'] = time();
 			//session_write_close();
 			if($_SESSION['SESS_ACCESS']=="Reviewer"){
-				header("location: /libtechconf/admin/review.php");
+				header("location: review.php");
 			}else{
-				header("location: /libtechconf/admin/utilities.php");
+				header("location: utilities.php");
 			}
 			exit();
 		}else {

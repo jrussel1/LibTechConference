@@ -1,6 +1,6 @@
 <?PHP
 require_once('auth.php');
-require_once('config.php');
+require_once('../resources/config_local.php');
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if(!$link) {
     die('Failed to connect to server: ' . mysql_error());
@@ -33,14 +33,14 @@ if(isset($_POST['Table_Select'])){
         ?></title>
 
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/libtechconf/resources/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <link rel="stylesheet" href="/libtechconf/resources/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/resources/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" href="/resources/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
     <script type="text/javascript" src="js/jquery.jeditable.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/libtechconf/resources/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/resources/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/center.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" href="/libtechconf/resources/DataTables-1.9.4/media/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="/resources/DataTables-1.9.4/media/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="css/utilitiesStyle.css" />
 
 
@@ -62,10 +62,10 @@ else{
 
 echo("<br/>
 	<div style='float:right'><table><tr>
-	<td style='padding-right:15px;'><a href='/libtechconf/admin/utilities.php'>Home</a></td>
-	<td style='padding-right:15px;'><a href='/libtechconf/admin/logout.php'>Logout</a></td>
-	<td style='padding-right:15px;'><a href='/libtechconf/admin/my_account.php'>Account Info</a></td>
-	<td style='padding-right:15px;'><a href='/libtechconf/Library.jpg' target='_blank'>View LDS of Database</a></td>
+	<td style='padding-right:15px;'><a href='/admin/utilities.php'>Home</a></td>
+	<td style='padding-right:15px;'><a href='/admin/logout.php'>Logout</a></td>
+	<td style='padding-right:15px;'><a href='/admin/my_account.php'>Account Info</a></td>
+	<td style='padding-right:15px;'><a href='/Library.jpg' target='_blank'>View LDS of Database</a></td>
 	</tr></table>
 	</div>
 
