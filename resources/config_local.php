@@ -1,6 +1,6 @@
 <?php
     define('DB_TYPE', 'mysql');
-    define('DB_HOST', 'localhost');
+    define('DB_HOST', '192.254.234.179');
     define('DB_USER', 'jrussell_dev');
     define('DB_PASSWORD', 'no1more2pass3words');
     define('DB_DATABASE', 'jrussell_Lib');
