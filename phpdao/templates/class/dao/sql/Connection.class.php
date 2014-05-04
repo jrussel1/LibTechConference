@@ -9,11 +9,11 @@ class Connection{
 	private $connection;
 
 	public function Connection(){
-		$this->connection = ConnectionFactory::getConnection();
+		$this->connection = DatabaseHandleFactory::getDBH();
 	}
 
 	public function close(){
-		ConnectionFactory::close($this->connection);
+		DatabaseHandleFactory::close($this->connection);
 	}
 
 	/**

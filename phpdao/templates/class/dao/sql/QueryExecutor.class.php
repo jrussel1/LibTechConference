@@ -16,7 +16,7 @@ class QueryExecutor{
 	public static function execute($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$connection = new DatabaseHandle();
 		}else{
 			$connection = $transaction->getConnection();
 		}		
@@ -47,7 +47,7 @@ class QueryExecutor{
 	public static function executeUpdate($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$connection = new DatabaseHandle();
 		}else{
 			$connection = $transaction->getConnection();
 		}		
@@ -73,7 +73,7 @@ class QueryExecutor{
 	public static function queryForString($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$connection = new DatabaseHandle();
 		}else{
 			$connection = $transaction->getConnection();
 		}

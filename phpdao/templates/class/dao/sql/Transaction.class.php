@@ -11,7 +11,7 @@ class Transaction{
 	private $connection;
 
 	public function Transaction(){
-		$this->connection = new Connection();
+		$this->connection = new DatabaseHandle();
 		if(!Transaction::$transactions){
 			Transaction::$transactions = new ArrayList();
 		}

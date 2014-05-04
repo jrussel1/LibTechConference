@@ -7,12 +7,14 @@
  */
 class SessionTargetMySqlDAO implements SessionTargetDAO{
 
-	/**
-	 * Get Domain object by primry key
-	 *
-	 * @param String $id primary key
-	 * @return SessionTargetMySql 
-	 */
+    /**
+     * Get Domain object by primary key
+     *
+     * @param $sessionID
+     * @param String $audience target audience
+     * @internal param String $id primary key
+     * @return SessionTargetMySql
+     */
 	public function load($sessionID, $audience){
 		$sql = 'SELECT * FROM Session_Target WHERE Session_ID = ?  AND Audience = ? ';
 		$sqlQuery = new SqlQuery($sql);

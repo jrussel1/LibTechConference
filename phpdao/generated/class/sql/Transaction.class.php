@@ -2,54 +2,54 @@
 /**
  * Database transaction
  *
- * @author: http://phpdao.com
- * @date: 27.11.2007
+ * @author: Benjamin Hillmann
+ * @date: 3/24/2014
  */
 class Transaction{
 	private static $transactions;
 
-	private $connection;
+	private $dbh;
 
 	public function Transaction(){
-		$this->connection = new Connection();
+		$this->dbh = new DatabaseHandle();
 		if(!Transaction::$transactions){
 			Transaction::$transactions = new ArrayList();
 		}
 		Transaction::$transactions->add($this);
-		$this->connection->executeQuery('BEGIN');
+		$this->dbh->executeQuery('BEGIN');
 	}
 
 	/**
-	 * Zakonczenie transakcji i zapisanie zmian
+	 * Execute a commit query
 	 */
 	public function commit(){
-		$this->connection->executeQuery('COMMIT');
-		$this->connection->close();
+		$this->dbh->executeQuery('COMMIT');
+		$this->dbh = null;
 		Transaction::$transactions->removeLast();
 	}
 
 	/**
-	 * Zakonczenie transakcji i wycofanie zmian
+	 * Execute a rollback query
 	 */
 	public function rollback(){
-		$this->connection->executeQuery('ROLLBACK');
-		$this->connection->close();
+		$this->dbh->executeQuery('ROLLBACK');
+        $this->dbh = null;
 		Transaction::$transactions->removeLast();
 	}
 
 	/**
-	 * Pobranie polaczenia dla obencej transakcji
+	 * Return the dbh
 	 *
-	 * @return polazenie do bazy
+	 * @return dbh
 	 */
-	public function getConnection(){
-		return $this->connection;
+	public function getDbh(){
+		return $this->dbh;
 	}
 
 	/**
-	 * Zwraca obecna transakcje
+	 * Get the current transaction
 	 *
-	 * @return transkacja
+	 * @return current transaction
 	 */
 	public static function getCurrentTransaction(){
 		if(Transaction::$transactions){

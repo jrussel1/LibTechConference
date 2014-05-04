@@ -2,8 +2,8 @@
 /**
  * Object executes sql queries
  *
- * @author: http://phpdao.com
- * @date: 27.11.2007
+ * @author: Benjamin Hillmann
+ * @date: 3/24/2014
  */
 class QueryExecutor{
 
@@ -16,9 +16,9 @@ class QueryExecutor{
 	public static function execute($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$dbh = new DatabaseHandle();
 		}else{
-			$connection = $transaction->getConnection();
+			$dbh = $transaction->getConnection();
 		}		
 		$query = $sqlQuery->getQuery();
 //                $pos = strpos($query, "null");
@@ -27,7 +27,7 @@ class QueryExecutor{
 //                      writeToFile($query);
 //                    }
 //                }
-		$result = $connection->executeQuery($query);
+		$result = $dbh->executeQuery($query);
 		if(!$result){
 			throw new Exception("SQL Error: -->".$query."<--" . mysql_error());
 		}
@@ -38,7 +38,7 @@ class QueryExecutor{
 		}
 		mysql_free_result($result);
 		if(!$transaction){
-			$connection->close();
+			$dbh = null;
 		}
 		return $tab;
 	}
@@ -47,7 +47,7 @@ class QueryExecutor{
 	public static function executeUpdate($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$connection = new DatabaseHandle();
 		}else{
 			$connection = $transaction->getConnection();
 		}		
@@ -73,7 +73,7 @@ class QueryExecutor{
 	public static function queryForString($sqlQuery){
 		$transaction = Transaction::getCurrentTransaction();
 		if(!$transaction){
-			$connection = new Connection();
+			$connection = new DatabaseHandle();
 		}else{
 			$connection = $transaction->getConnection();
 		}
